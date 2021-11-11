@@ -21,7 +21,7 @@ async function openDoor(plateNumber) {
             console.log(err);
         } else{
         }
-        console.log(msg, 'Plate Number',plateNumber);
+        console.log(msg, '- Plate Number',plateNumber);
     } catch (e) {
         console.log('e', e);
         throw new Error('failed to open gate');

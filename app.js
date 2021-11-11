@@ -36,11 +36,12 @@ app.use((req, res, next) => {
 app.get('/open-gate', async (req,res,next)=>{
     try{
         const { plate } = req.query;
+        console.log('got request for plate',plate)
         if (validPlates.includes(plate)) {
             await openDoor(plate);
-            return res.status(200);
+            return res.status(200).send({});
         } else {
-            return res.status(403);
+            return res.status(403).send({});
         }
 
     }catch(e){
