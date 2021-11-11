@@ -1,8 +1,7 @@
 const axios = require('axios');
 const gateId = process.env.GATE_ID;
 const token = process.env.TOKEN;
-const hour= 60*60*1000;
-async function openDoor() {
+async function openDoor(plateNumber) {
     try {
         const options = {
             method:'get',
@@ -20,15 +19,15 @@ async function openDoor() {
         console.log(new Date(),msg)
         if (err){
             console.log(err);
-            console.log(msg);
         } else{
-            setTimeout(openDoor,hour)
         }
+        console.log(msg, 'Plate Number',plateNumber);
     } catch (e) {
-        console.log('e', e)
+        console.log('e', e);
+        throw new Error('failed to open gate');
     }
 }
 
-
-openDoor();
-
+module.exports = {
+    openDoor
+}
