@@ -72,4 +72,4 @@ async function sample(){
     setTimeout(sample, getTimeout(shouldOpen))
 }
 
-sample();
+//sample();
