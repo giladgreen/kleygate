@@ -26,7 +26,7 @@ async function isCar(image, inImage = true, sanity = false) {
     })
 
     const total = sanity ? 60*50 : (inImage ? totalPixels : 390 * 270);
-    const result =  diffCount > (total / 8);
+    const result =  diffCount > (total / 7);
     return result;
 
 }
@@ -34,13 +34,13 @@ async function isCar(image, inImage = true, sanity = false) {
 async function sleepFewSec(){
     return new Promise((resolve, reject) => {
         setTimeout(()=>{
-            reject(new Error('time out'));
-        },10000)
+            reject(new Error('time out!  '));
+        },15000)
     });
 }
 async function captureImage(filename, cameraIp, cameraPort, cameraUser, cameraPassword){
     try {
-        await Promise.race([execPromise(`ffmpeg  -rtsp_transport tcp -y -i rtsp://${cameraUser}:${cameraPassword}@${cameraIp}:${cameraPort}/live -flags2 fast -frames:v 1 ${filename}`), sleepFewSec()]);
+        await Promise.race([execPromise(`ffmpeg -rtsp_transport tcp -y -i rtsp://${cameraUser}:${cameraPassword}@${cameraIp}:${cameraPort}/live -flags2 fast -frames:v 1 ${filename}`), sleepFewSec()]);
         const sanityName = await cropSanity(filename);
         const isNormalImage = !(await isCar(sanityName, false, true));
         return isNormalImage;

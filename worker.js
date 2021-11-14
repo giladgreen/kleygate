@@ -4,9 +4,14 @@ const {isInBetween} = require('./time-service');
 const {captureImage,crop, isCar } = require('./image-service');
 const cameraIpAddress= process.env.CAMERA_IP;
 const cameraPassword= process.env.CAMERA_PASSWORD;
+const isServer= process.env.SERVER === 'true';
 
 let counter = 0;
 function log(msg){
+    if (isServer){
+        console.log(msg);
+        return;
+    }
     process.stdout.write('                                            '+'\r');
     process.stdout.write(msg+'\r');
 }
@@ -73,4 +78,4 @@ async function sample(){
     setTimeout(sample, getTimeout(shouldOpen))
 }
 
-//sample();
+sample();

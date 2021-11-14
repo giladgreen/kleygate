@@ -7,19 +7,15 @@ function isNight(){
     const now = new Date();
     const hour = now.getUTCHours();
     const minutes = now.getUTCMinutes();
-    if (hour === sunrizeHour &&  minutes < sunrizeMinute - 10){
-        return true;
-    }
-    if (hour === sunsetHour && minutes > sunsetMinute + 10){
-        return true;
-    }
-    return false;
+
+    return (hour > sunsetHour || (hour ===sunsetHour && minutes > sunsetMinute + 10) || hour < sunrizeHour || (hour === sunrizeHour && minutes < sunsetMinute - 10))
+
+
 }
 function isInBetween(){
     const now = new Date();
     const hour = now.getUTCHours();
     const minutes = now.getUTCMinutes()
-    const long = 20 * 60 * 1000;
     if (hour === sunrizeHour && sunrizeMinute - 10 < minutes && minutes < sunrizeMinute + 10){
         return true;
     }
