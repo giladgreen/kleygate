@@ -1,7 +1,18 @@
 const axios = require('axios');
 const gateId = process.env.GATE_ID;
 const token = process.env.TOKEN;
+let lastOpen = null;
+const twentySec = 1000*20;
+
 async function openDoor(plateNumber) {
+    if (lastOpen){
+        const now = new Date();
+        const shouldOpen = (now.getTime() - lastOpen.getTime()) < twentySec;
+        if (!shouldOpen){
+           // console.log('last open was less hen a minute ago - skipping', plateNumber)
+            return false;
+        }
+    }
     try {
         const options = {
             method:'get',
@@ -19,12 +30,15 @@ async function openDoor(plateNumber) {
         console.log(new Date(),msg)
         if (err){
             console.log(err);
+            return false;
         } else{
+            lastOpen = new Date();
+           // console.log(msg, '- Plate Number',plateNumber);
+            return true;
         }
-        console.log(msg, '- Plate Number',plateNumber);
     } catch (e) {
         console.log('e', e);
-        throw new Error('failed to open gate');
+        return false;
     }
 }
 

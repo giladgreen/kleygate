@@ -31,6 +31,11 @@ module.exports = function (sequelize, DataTypes) {
             field: 'deleted_at',
             allowNull: true,
         },
+        lastOpenedAt: {
+            type: DataTypes.DATE,
+            field: 'last_opened_at',
+            allowNull: true,
+        },
     }, {
         paranoid: true,
         tableName: 'plates',

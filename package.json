@@ -2,9 +2,12 @@
   "name": "kleygate",
   "version": "1.0.0",
   "description": "",
-  "main": "app.js",
+  "main": "worker.js",
   "scripts": {
-    "start": "node app.js"
+    "start": "node worker.js"
+  },
+  "engines": {
+    "node": ">=12.13.0"
   },
   "repository": {
     "type": "git",
@@ -17,10 +20,12 @@
     "compression": "^1.7.4",
     "express": "^4.12.3",
     "express-rate-limit": "^3.3.2",
+    "img-diff-js": "^0.5.2",
     "path": "^0.12.7",
     "pg": "^8.5.1",
     "pg-hstore": "^2.3.3",
-    "sequelize": "^6.9.0"
+    "sequelize": "^6.9.0",
+    "sharp": "^0.29.2"
   },
   "author": "",
   "license": "ISC",
