@@ -46,10 +46,11 @@ async function archive(imageName){
 }
 async function sample(){
     let shouldOpen = false;
+    const imageName = getImageName();
     try {
         counter++;
         deleteFolderFiles();
-        const imageName = getImageName();
+
         log(`${counter}) image: ${imageName}                        `);
         const hasImage = await captureImage(imageName, cameraIpAddress, '554', 'admin', cameraPassword);
         if (hasImage) {
